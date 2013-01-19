@@ -1,0 +1,352 @@
+/* ----------------------------- */
+/* ==reset */
+/* ----------------------------- */
+	/* Reset buttons */
+	button, input[type="button"], input[type="reset"], input[type="submit"] {
+	cursor: pointer;
+	-webkit-appearance: button;
+	*overflow: visible;
+	border: none;
+	background: none;
+	}
+	a, a:visited, .link, .pointer {
+	color: #15c;
+	text-decoration: none;
+	cursor: pointer;
+	}
+	html { font-size: 62.5% }
+	html, body, input { font-family: arial,sans-serif }
+	body {
+	background-color: #fff;
+	color: #000;
+	font-size: 1.4em; /* equiv 14px */
+	line-height: 1.5;
+	}
+	p, ul, ol, dl, blockquote, pre, td, th, label, textarea {
+	font-size: 1em; /* equiv 14px */
+	line-height: 1.5em;
+	margin: 21px 0;
+	}
+	h1 {
+	font-size: 1.7em; /* equiv 26px */
+	font-weight: normal;
+	line-height: 1.6154em;
+	margin: 42px 0 21px 0;
+	}
+	h2 {
+	font-size: 1.6em; /* equiv 24px */
+	font-weight: normal;
+	line-height: 1.75em;
+	margin: 42px 0 21px 0;
+	}
+	h3 {
+	font-size: 1.4em; /* equiv 22px */
+	font-weight: normal;
+	line-height: 1.909em;
+	margin: 42px 0 21px 0;
+	}
+	/* soft reset */
+	html, body, label {
+	margin: 0;
+	padding: 0;
+	}
+	ul, ol { padding-left: 5px }
+	code, pre, samp {
+	white-space: pre-wrap;
+	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+	}
+	code { line-height: 1em }
+	table { margin-bottom: 21px }
+	/* avoid collapsing margins on headings */
+	h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child { margin-top: 0 }
+	/* avoid margins on nested elements */
+	li p, li ul, li ol {
+	margin-top: 0;
+	margin-bottom: 0;
+	}
+	/* HTML5 tags */
+	article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block }
+	/* max values */
+	img, table, td, blockquote, code, pre, textarea, input, object, video {
+	max-width: 100%;
+	height: auto;
+	}
+	/* pictures */
+	img {
+	width: auto;
+	vertical-align: middle;
+	}
+	a img { border: 0 }
+
+/* ----------------------------- */
+/* ==layout and modules */
+/* ----------------------------- */
+	/* switching box model for all elements */
+	* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	}
+	.mod { padding: 14px }
+	.item { overflow: hidden }
+	.left {
+	float: left;
+	margin-right: 14px;
+	}
+	.mod.left, .col.left { margin-right: 0 }
+	.right {
+	float: right;
+	margin-left: 14px;
+	}
+	.mod.right, .col.right { margin-left: 0 }
+	.w300p { width: 300px }
+
+/* ----------------------------- */
+/* ==header */
+/* ----------------------------- */
+	.hidden{
+	display: none;
+	}
+	h1.logo {
+	font-size: 2em;
+	margin-top: -13px;
+	}
+	header>button {
+	margin-top: -5px;
+	float: right;
+	}
+	header.toper {
+	background: none repeat scroll 0% 0% rgb(241, 241, 241);
+	border-bottom: 1px solid rgb(229, 229, 229);
+	border-color: rgb(229, 229, 229);
+	height: 50px;
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	z-index: 985;
+	}
+	.loginBloc { float: right }
+	.deco { margin-right: 11px }
+	nav {
+	float: left;
+	margin-top: -26px;
+	}
+	header img.icon {
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+	}
+
+/* ----------------------------- */
+/* ==sidebar */
+/* ----------------------------- */
+	aside {
+	margin-top: 70px;
+	background: white;
+	font-size: 14px;
+	}
+	aside ul {
+	list-style: none;
+	margin-top: 0px;
+	}
+	aside ul.flux, .pointer { padding-left: 9px }
+	aside>ul>li.flux, .pointer {
+	width: 100%;
+	margin: 1px;
+	background: none repeat scroll 0% 0% rgb(241, 241, 241);
+	border: 1px solid rgb(229, 229, 229);
+	border-radius: 2px 2px 2px 2px;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	}
+	li.flux>ul {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: white;
+	width: 100%;
+	text-indent: none;
+	font-size: .9em;
+	display: inline-block;
+	}
+	li.flux>ul a {
+	white-space: nowrap;
+	max-width: 200px;
+	}
+	button.allread {
+	width: 261px;
+	margin: 0px 10px 10px 10px;
+	}
+	.fade, button.fade {
+	color: #666666;
+	/*float: right;*/
+	cursor: pointer;
+	margin-right: 2px;
+	border: none;
+	}
+	.marquerlu { margin-top: 33px }
+	.readFolder {
+	display: block;
+	width: 22px;
+	height: 22px;
+	line-height: 22px; /*centrage vertical du texte*/
+	margin-right: 4px;
+	color: #e5e5e5;
+	background: #666;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	font-size: 2em;
+	}
+	.readFolder:hover, .readFolder:active {
+	color: #666;
+	background: #e5e5e5;
+	}
+
+/* ----------------------------- */
+/* ==main */
+/* ----------------------------- */
+	iframe {
+	border: 0;
+	margin: 0;
+	}
+	a.goTopButton { font-size: 3em }
+	button.lunonlu {
+	float: right;
+	margin-bottom: 2px;
+	}
+	.content {
+	padding-top: 80px;
+	min-height: 600px;
+	}
+	section.article {
+	border: 1px solid #ebebeb;
+	padding: 10px;
+	margin-bottom: 5px;
+	}
+	section>h2 {
+	color: rgb(17, 85, 204);
+	margin: 0px;
+	padding: 0px;
+	}
+	section>h3 {
+	color: rgb(102, 102, 102);
+	font-size: .9em;
+	font-style: italic;
+	margin: 0px 0px 20px;
+	padding: 0px;
+	}
+	.content #addBloc, .content #manageFolderBloc, .content #synchronizeBloc, .content #importBloc, .content #exportBloc, .content #bookBloc, .content #preferenceBloc { display: none }
+	ul.gestflux { list-style: none }
+
+/* ----------------------------- */
+/* ==footer */
+/* ----------------------------- */
+	footer.parter {
+	background: none repeat scroll 0% 0% rgb(241, 241, 241);
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	padding: 7px 7px 7px 25px;
+	width: 100%;
+	}
+
+/* ----------------------------- */
+/* ==forms */
+/* ----------------------------- */
+	form, fieldset { border: none }
+	input, button, select, label {
+	vertical-align: middle; /* @bugfix alignment */
+	background: white;
+	border: 1px solid #dcdcdc;
+	padding: 2px;
+	}
+	button.red, .red {
+	background-color: #d14836;
+	border: 1px solid transparent;
+	border-radius: 2px 2px 2px 2px;
+	border: 1px solid #c03927;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFF;
+	line-height: 27px;
+	outline: 0px none;
+	padding: 0px 8px;
+	height: 31px!important;
+	cursor: pointer;
+	}
+	.red:hover, .red:active { background-color: #c03927 }
+	button.grey, .grey {
+	background-color: #f5f5f5;
+	border: 1px solid #dcdcdc;
+	border-radius: 2px 2px 2px 2px;
+	color: #444;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 27px;
+	list-style: none outside none;
+	text-align: center;
+	height: 31px;
+	cursor: pointer;
+	}
+	.grey:hover, .grey:active { background-color: #dcdcdc }
+	.favorite {
+	float: right;
+	margin-left: 5px;
+	padding: 1px 3px 1px 3px;
+	}
+
+/* ----------------------------- */
+/* ==print */
+/* ----------------------------- */
+	@media print { 
+	p, blockquote {
+	orphans: 2;
+	widows: 2;
+	}
+	blockquote, ul, ol { page-break-inside: avoid }
+	h1, h2, h3, caption { page-break-after: avoid }
+	}
+
+/* ----------------------------- */
+/* ==desktop medias */
+/* ----------------------------- */
+	@media (min-width: 641px) { 
+	/* here go rules for big resources and big screens like: background-images, font-faces, etc. */
+	}
+	
+/* ----------------------------- */
+/* ==mobile */
+/* ----------------------------- */
+	/* quick tablet reset */
+	@media (max-width: 800px) { 
+	.tablet-hidden { display: none }
+	[class*="mw"], [class*="w9"], [class*="w8"], [class*="w7"], [class*="w6"] { width: auto }
+	aside.left {
+	float: none;
+	width: 100%;
+	}
+	.content { padding-top: 0px }
+	}
+	/* quick smartphone reset */
+	@media (max-width: 640px) { 
+	.phone-hidden { display: none }
+	.mod, .col, label, fieldset {
+	display: block !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	border: 0;
+	float: none !important;
+	width: auto !important;
+	}
+	[class*="w5"], [class*="w4"], [class*="w3"] { width: auto }
+	.row { width: 100% !important }
+	header.toper { position: relative }
+	aside { margin-top: 20px }
+	}
+	@media (max-width: 720px) { 
+
+	}
+	/* orientation iOS font-size fix */
+	@media (orientation: landscape) and (max-device-width: 640px) { 
+	html, body { -webkit-text-size-adjust: 100% }
+	}

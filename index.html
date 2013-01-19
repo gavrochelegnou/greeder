@@ -1,0 +1,172 @@
+<!--
+ @nom: index
+ @auteur: Tom Canac (http://tomcanac.com)
+ @description: Page d'accueil et de lecture des flux
+-->
+{include="header"}
+{if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
+<div id="wrap">
+<!---->
+<!-- MENU -->
+<!---->
+	<aside class="mod left w300p">
+		
+		<button class="red allread" onclick="if(confirm('Tout marquer comme lu pour tous les flux?'))window.location='action.php?action=readAll'">Tout marquer comme lu</button>
+		<ul class="flux">
+			<!--Pour chaque dossier-->
+				{loop="folders"}
+					{$feeds=""}
+					<!--on récupere tous les flux lié au dossier-->
+				  	{if="isset($allFeedsPerFolder[$value->getId()])"}
+				  		{$feeds=$allFeedsPerFolder[$value->getId()]}
+				  	{/if}
+				  	{if="isset($allEvents[$value->getId()])"}
+				  		{$unreadEventsForFolder=$allEvents[$value->getId()]}
+				  	{/if}
+			<!-- DOSSIER -->
+			<li class="flux">
+				<a class="readFolder" title="Plier/Deplier le dossier" alt="Plier/Deplier le dossier" onclick="toggleFolder(this,{$value->getId()});" >
+					{if="!$value->getIsopen()"}+{else}-{/if}
+				</a>
+				
+				<a alt="Lire les evenements de ce dossier" title="Lire les évenements de ce dossier" href="index.php?action=selectedFolder&folder={$value->getId()}">
+					{$value->getName()}
+				</a>
+
+				{if="$unreadEventsForFolder!=0"}
+				<a class="fade" alt="marquer comme lu le(s) {$unreadEventsForFolder} evenement(s) non lu(s) de ce dossier" title="marquer comme lu le(s) {$unreadEventsForFolder} evenement(s) non lu(s) de ce dossier" onclick="if(confirm('Tout marquer comme lu pour ce dossier?'))window.location='action.php?action=readFolder&folder={$value->getId()}';">
+					({$unreadEventsForFolder})
+				</a>
+				{/if}
+
+				<!-- FLUX DU DOSSIER -->
+				<ul {if="!$value->getIsopen()"}style="display:none;"{/if}>
+					 
+						{if="count($feeds)!=0"}
+							{loop="feeds"}
+								<li> 
+									<!--<img src="http://www.google.com/s2/favicons?domain={$value2['url']}"/> Favicon-->
+									<a href="index.php?action=selectedFeed&feed={$value2['id']}" alt="{$value2['url']}" title="{$value2['url']}">{$value2['name']} </a>
+									{if="isset($unread[$value2['id']])"}  
+									<button class="fade" onclick="if(confirm('Tout marquer comme lu pour ce flux?'))window.location='action.php?action=readAll&feed={$value2['id']}';">
+										<span class="fade" alt="marquer comme lu" title="marquer comme lu">({$unread[$value2['id']]})</span>
+									</button>
+									{/if}
+								</li>
+							{/loop}
+						{/if}
+				</ul>
+				<!-- FIN FLUX DU DOSSIER -->
+			</li>
+			<!-- FIN DOSSIER -->
+			{$unreadEventsForFolder=0}
+			{/loop}
+		</ul>
+	</aside>
+<!---->
+<!-- ARTICLES -->
+<!---->
+<div class="content mod item">
+	<article>
+		{loop="$events"}
+			{$plainDescription=strip_tags($value->getDescription())}	
+			<!-- CORPS ARTICLE -->
+			 
+			<section class="article {if="!$value->getUnread()"} eventRead {/if} {$hightlighted%2==0?'eventHightLighted':''}" >
+				<a class="anchor" name="{$value->getId()}"></a>
+				<!-- TITRE -->
+				<h2 class="articleTitle">
+					<a onclick="readThis(this,{$value->getId()},'title');" target="_blank" href="{$value->getLink()}" alt="{$plainDescription}" title="{$plainDescription}">{$value->getTitle()}</a> 
+				</h2>
+				<!-- DETAILS + OPTIONS -->
+				<h3 class="articleDetails">
+					{if="$articleDisplayLink"}
+						<!--<img src="http://www.google.com/s2/favicons?domain="/> Favicon-->
+						<a href="{$value->getLink()}" target="_blank">{$allFeeds['idMap'][$value->getFeed()]['name']}</a>
+					{/if}
+					{if="$articleDisplayAuthor"}
+					 par {$value->getCreator()}
+					{/if}
+
+					{if="$articleDisplayDate"} 
+						{$value->getPubdateWithInstant($time)} 
+					{/if}
+					<button class="right red lunonlu" onclick="readThis(this,{$value->getId()}{$action=='unreadEvents' || $action==''?',true':''});">(lu/non lu)</button>
+					{if="$value->getFavorite()!=1"} -  <a class="grey favorite" onclick="addFavorite(this,{$value->getId()});" >Favoriser</a> 
+					{else}
+					 <a class="grey favorite" onclick="removeFavorite(this,{$value->getId()});" >D&eacute;favoriser</a> 
+					 {/if}
+					{if="$shareOption!=false"} <a target="_blank" alt="partager sur shaarli" title="partager sur shaarli" href="{$shareOption.'/index.php?post='.rawurlencode($value->getLink()).'&title='.$value->getTitle().'&source=bookmarklet' }">Shaare</a> 
+					{/if}
+					 
+				</h3>
+
+				<!-- CONTENU/DESCRIPTION -->
+				{if="$articleDisplayContent"}
+				<div class="articleContent">
+					{if="$articleView=='partial'"}
+						{$value->getDescription()}
+					{else}
+						{$value->getContent()}
+					{/if}
+				</div> 
+				{/if}
+				
+				{if="$articleView!='partial'"}
+				<!-- RAPPEL DETAILS + OPTIONS POUR LES ARTICLES AFFICHES EN ENTIER -->
+				<h3 class="articleDetails">
+					
+					{if="$shareOption!=false"} <a alt="partager sur shaarli" title="partager sur shaarli" target="_blank" href="{$shareOption.'/index.php?post='.rawurlencode($value->getLink()).'&title='.$value->getTitle().'&source=bookmarklet'}">Shaare</a> 
+					{/if}
+					 <span class="pointer right readUnreadButton" onclick="readThis(this,{$value->getId()}{$action=='unreadEvents' || $action==''?',true':''});">(lu/non lu)</span>
+					 {if="$value->getFavorite()!=1"}<a class="right pointer favorite"  onclick="addFavorite(this,{$value->getId()});" >Favoriser</a> 
+					{else}
+					 <a class="right pointer favorite" onclick="removeFavorite(this,{$value->getId()});" >D&eacute;favoriser</a>  
+					 {/if}
+					 <div class="clear"></div>
+				</h3>
+				{/if}
+
+			</section>
+			{$hightlighted=$hightlighted+1}
+		{/loop}
+
+		<!-- PIED DE PAGE DES ARTICLES -->
+
+		{if="$pages!=0"}
+			<p>Page {$page}/{$pages} : 
+
+				{if="$previousPages>0"}
+				<a href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$previousPages}"><<</a>
+				{/if}
+				
+				{loop="pagesArray"}
+
+					{if="$page!=$value"}
+					<a href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$value}">{$value}</a> 
+					{else}
+					{$value}
+					{/if}
+					|
+				{/loop}
+
+				{if="$nextPages>0"}
+				<a href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$nextPages}">>></a>
+				{/if}
+			</p> 
+		{/if}
+
+	</article>
+</div> <!-- #content -->
+</div> <!-- #wrap -->
+
+{else}
+	<div id="wrap">
+		<article style="margin:70px 0px 0px 25px;">
+				<h3>Vous devez &ecirc;tre connect&eacute; pour consulter vos flux </h3>
+				<p>Si vous &ecirc;tes administrateur, vous pouvez r&eacute;gler les droits de visualisation dans la partie administration.</p>
+		</article>
+	</div>
+{/if}
+
+{include="footer"}
