@@ -96,7 +96,7 @@
 	.mod.left, .col.left { margin-right: 0 }
 	.right {
 	float: right;
-	margin-left: 14px;
+	margin-left: 8px;
 	}
 	.mod.right, .col.right { margin-left: 0 }
 	.w300p { width: 300px }
@@ -271,7 +271,7 @@
 	button.red, .red {
 	background-color: #d14836;
 	border: 1px solid transparent;
-	border-radius: 2px 2px 2px 2px;
+	border-radius: 2px;
 	border: 1px solid #c03927;
 	font-size: 11px;
 	font-weight: bold;
@@ -286,7 +286,7 @@
 	button.grey, .grey {
 	background-color: #f5f5f5;
 	border: 1px solid #dcdcdc;
-	border-radius: 2px 2px 2px 2px;
+	border-radius: 2px;
 	color: #444;
 	font-size: 11px;
 	font-weight: bold;
@@ -296,11 +296,12 @@
 	height: 31px;
 	cursor: pointer;
 	}
-	.grey:hover, .grey:active, .grey-h { background-color: #dcdcdc; }
+	.grey:hover,
+	.grey:active, .grey-h { background-color: #dcdcdc; } /*pour les boutons non cliquables*/
 	.grey-h{cursor: default;}
 	.favorite {
 	float: right;
-	margin-left: 5px;
+	margin-left: 8px;
 	padding: 1px 3px 1px 3px;
 	}
 
