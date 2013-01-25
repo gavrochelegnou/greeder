@@ -232,7 +232,6 @@
 	section>h3 {
 	color: rgb(102, 102, 102);
 	font-size: .9em;
-	font-style: italic;
 	margin: 0px 0px 20px;
 	padding: 0px;
 	}
@@ -249,7 +248,16 @@
 	padding: 7px 7px 7px 25px;
 	width: 100%;
 	}
-
+	#pages{
+	
+	}
+	a.page{
+    padding: 8px 12px 7px;
+    margin-right: 2px;
+    margin-left: 2px;
+    font-size: 13px;
+    font-weight: bold;
+	}
 /* ----------------------------- */
 /* ==forms */
 /* ----------------------------- */
@@ -288,7 +296,8 @@
 	height: 31px;
 	cursor: pointer;
 	}
-	.grey:hover, .grey:active { background-color: #dcdcdc }
+	.grey:hover, .grey:active, .grey-h { background-color: #dcdcdc; }
+	.grey-h{cursor: default;}
 	.favorite {
 	float: right;
 	margin-left: 5px;

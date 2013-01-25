@@ -134,24 +134,25 @@
 		<!-- PIED DE PAGE DES ARTICLES -->
 
 		{if="$pages!=0"}
-			<p>Page {$page}/{$pages} : 
+			<p>
+				<a class="grey-h page">Page {$page}/{$pages} : </a>
 
 				{if="$previousPages>0"}
-				<a href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$previousPages}"><<</a>
+				<a class="grey page" href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$previousPages}"><<</a>
 				{/if}
 				
 				{loop="pagesArray"}
 
 					{if="$page!=$value"}
-					<a href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$value}">{$value}</a> 
+					<a class="grey page" href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$value}">{$value}</a> 
 					{else}
-					{$value}
+					<a class="grey-h page">{$value}</a>
 					{/if}
-					|
+
 				{/loop}
 
 				{if="$nextPages>0"}
-				<a href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$nextPages}">>></a>
+				<a class="grey page" href="index.php?action={$action}{if="$action=='selectedFeed'"}&feed={$currentFeed->getId()}{/if}{if="$action=='selectedFolder'"}&folder={$currentFolder->getId()}{/if}&page={$nextPages}">>></a>
 				{/if}
 			</p> 
 		{/if}
