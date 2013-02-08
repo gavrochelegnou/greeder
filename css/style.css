@@ -30,19 +30,16 @@
 	h1 {
 	font-size: 1.7em; /* equiv 26px */
 	font-weight: normal;
-	line-height: 1.6154em;
 	margin: 42px 0 21px 0;
 	}
 	h2 {
 	font-size: 1.6em; /* equiv 24px */
 	font-weight: normal;
-	line-height: 1.75em;
 	margin: 42px 0 21px 0;
 	}
 	h3 {
 	font-size: 1.4em; /* equiv 22px */
 	font-weight: normal;
-	line-height: 1.909em;
 	margin: 42px 0 21px 0;
 	}
 	/* soft reset */
@@ -241,6 +238,7 @@
 	}
 	.content #addBloc, .content #manageFolderBloc, .content #synchronizeBloc, .content #importBloc, .content #exportBloc, .content #bookBloc, .content #preferenceBloc { display: none }
 	ul.gestflux { list-style: none }
+	h3.buttonsbis{margin-bottom: 52px;}
 
 /* ----------------------------- */
 /* ==footer */
@@ -307,7 +305,7 @@
 	float: right;
 	margin-left: 8px;
 	padding: 1px 3px 1px 3px;
-	width: 69px;
+	width: 83px;
 	}
 
 /* ----------------------------- */
