@@ -72,7 +72,7 @@
 			{$plainDescription=strip_tags($value->getDescription())}	
 			<!-- CORPS ARTICLE -->
 			
-			<section class="article {if="!$value->getUnread()"} eventRead {/if} {$hightlighted%2==0?'eventHightLighted':''}" >
+			<section class="article {if="!$value->getUnread()"} eventRead {/if} {if="$articleDisplayContent==false"}digest{/if} " >
 				<a class="anchor" name="{$value->getId()}"></a>
 				<!-- TITRE -->
 				<h2 class="articleTitle">

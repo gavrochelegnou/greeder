@@ -219,8 +219,17 @@
 	section.article {
 	border: 1px solid #e5e5e5;
 	border-radius: 2px 2px 2px 2px;
-	padding: 10px;
+	padding: 10px 10px 0px 10px;
 	margin-bottom: 5px;
+	}
+	section.article.digest{
+	padding: 5px 5px 0px 5px;
+	border:  1px solid #e5e5e5;
+	margin-bottom: -1px;
+	line-height: 1.4em;
+	}
+	section.article.digest h2{
+		font-size: 1.3em;
 	}
 	.eventRead{
 		background-color: #f1f1f1;
