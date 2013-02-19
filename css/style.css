@@ -328,34 +328,10 @@
 /* ----------------------------- */
 /* ==mobile */
 /* ----------------------------- */
-	/* quick tablet reset */
 	@media (max-width: 800px) { 
-	.tablet-hidden { display: none }
-	[class*="mw"], [class*="w9"], [class*="w8"], [class*="w7"], [class*="w6"] { width: auto }
-	aside.left {
-	float: none;
-	width: 100%;
-	}
-	.content { padding-top: 0px }
-	}
-	/* quick smartphone reset */
-	@media (max-width: 640px) { 
-	.phone-hidden { display: none }
-	.mod, .col, label, fieldset {
-	display: block !important;
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-	border: 0;
-	float: none !important;
-	width: auto !important;
-	}
-	[class*="w5"], [class*="w4"], [class*="w3"] { width: auto }
-	.row { width: 100% !important }
-	header.toper { position: relative }
-	aside { margin-top: 20px }
-	}
-	@media (max-width: 720px) { 
-
+		aside.left {float: none;margin-bottom: 10px;}
+		.w300p{width: 100%;padding-right: 10px;}
+		.content { padding-top: 0px }
 	}
 	/* orientation iOS font-size fix */
 	@media (orientation: landscape) and (max-device-width: 640px) { 
