@@ -25,29 +25,24 @@
 	sert de base a javascript pour connaitre l'action courante
 	permet le retour en haut de page -->
 	<a id="pageTop" class="hidden">{$action}</a>
-		<header class="line mod toper">
+		<header class=" toper">
 			<h1 class="logo left" id="title"><a href="./index.php"><img src="logo.png" alt="logo"></a></h1>
-			
-			
-
 			<div class="loginBloc">
 				{if="!$myUser"}
-				<form action="action.php?action=login" method="POST">
-						<input type="text" class="miniInput left" name="login" placeholder="Identifiant"/> <input type="password" class="miniInput left" name="password" placeholder="Mot de passe"/> <button class="red">GO!</button>
+				<form class="formulco" action="action.php?action=login" method="POST">
+						<input type="text" class="miniInput left" name="login" placeholder="Identifiant"/> <input type="password" class="miniInput left" name="password" placeholder="Mot de passe"/> <button class="red connexion">GO!</button>
 				</form>
 				{else}
 			</div>
-			<nav>
-			<ul id="icons">
-				<a href="index.php"><img src="home.png" class="icon" alt="Accueil"></a></li>
-				<a href="index.php?action=favorites"><img src="favs.png" class="icon" alt="Favoris"></a></li>
-				<a href="settings.php"><img src="settings.png" class="icon" alt="Paramètres"></a></li>
-				<a class="synchronyzeButton" title="Synchroniser" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');"><img src="sync.png" class="icon" alt="Actualiser"></a></li>
-			</ul>
-			</nav>
-					<button class="grey deco" onclick="window.location='action.php?action=logout'">
-						D&eacute;connexion
-					</button>
+				<nav id="icons">
+					<a href="index.php"><img src="home.png" class="icon" alt="Accueil"></a>
+					<a href="index.php?action=favorites"><img src="favs.png" class="icon" alt="Favoris"></a>
+					<a href="settings.php"><img src="settings.png" class="icon" alt="Paramètres"></a>
+					<a class="synchronyzeButton" title="Synchroniser" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');"><img src="sync.png" class="icon" alt="Actualiser"></a>
+				</nav>
+				<button class="grey deco" onclick="window.location='action.php?action=logout'">
+					D&eacute;connexion
+				</button>
 				{/if}
 				<div class="clear"></div>
 			</div>

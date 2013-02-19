@@ -20,7 +20,7 @@
 	background-color: #fff;
 	color: #000;
 	font-size: 1.4em; /* equiv 14px */
-	line-height: 1.5;
+	line-height: 1.3;
 	}
 	p, ul, ol, dl, blockquote, pre, td, th, label, textarea {
 	font-size: 1em; /* equiv 14px */
@@ -84,11 +84,11 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	}
-	.mod { padding: 14px }
+	.mod { padding: 7px }
 	.item { overflow: hidden }
 	.left {
 	float: left;
-	margin-right: 14px;
+	margin-right: 4px;
 	}
 	.mod.left, .col.left { margin-right: 0 }
 	.right {
@@ -104,29 +104,26 @@
 	.hidden{
 	display: none;
 	}
-	h1.logo {
-	font-size: 2em;
-	margin-top: -13px;
-	}
 	header>button {
-	margin-top: -5px;
 	float: right;
 	}
 	header.toper {
 	background: none repeat scroll 0% 0% rgb(241, 241, 241);
 	border-bottom: 1px solid rgb(229, 229, 229);
 	border-color: rgb(229, 229, 229);
-	height: 50px;
+	height: 41px;
 	position: absolute;
 	top: 0px;
 	width: 100%;
 	z-index: 985;
+	padding:4px;
 	}
-	.loginBloc { float: right }
-	.deco { margin-right: 11px }
+	
+	.loginBloc { float: right; margin-top: 1px;}
+	.loginBloc input{ margin-top: 4px;}
+	.deco { margin-right: 11px;line-height: 20px!important;}
 	nav {
 	float: left;
-	margin-top: -26px;
 	}
 	header img.icon {
 	float: left;
@@ -138,9 +135,8 @@
 /* ==sidebar */
 /* ----------------------------- */
 	aside {
-	margin-top: 70px;
+	margin-top: 51px;
 	background: white;
-	font-size: 14px;
 	}
 	aside ul {
 	list-style: none;
@@ -171,7 +167,7 @@
 	max-width: 200px;
 	}
 	button.allread {
-	width: 261px;
+	width: 291px;
 	margin: 0px 10px 10px 10px;
 	}
 	.fade, button.fade {
@@ -213,13 +209,13 @@
 	margin-bottom: 2px;
 	}
 	.content {
-	padding-top: 80px;
+	padding-top: 51px;
 	min-height: 600px;
 	}
 	section.article {
 	border: 1px solid #e5e5e5;
 	border-radius: 2px 2px 2px 2px;
-	padding: 10px 10px 0px 10px;
+	padding: 5px;
 	margin-bottom: 5px;
 	}
 	section.article.digest{
@@ -287,10 +283,10 @@
 	font-size: 11px;
 	font-weight: bold;
 	color: #FFF;
-	line-height: 27px;
+	line-height: 20px;
 	outline: 0px none;
 	padding: 0px 8px;
-	height: 31px!important;
+	height: 30px!important;
 	cursor: pointer;
 	}
 	.red:hover, .red:active { background-color: #c03927 }
@@ -301,10 +297,10 @@
 	color: #444;
 	font-size: 11px;
 	font-weight: bold;
-	line-height: 27px;
+	line-height: 30px;
 	list-style: none outside none;
 	text-align: center;
-	height: 31px;
+	height: 30px;
 	cursor: pointer;
 	}
 	.grey:hover,

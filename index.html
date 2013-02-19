@@ -5,11 +5,10 @@
 -->
 {include="header"}
 {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
-<div id="wrap">
 <!---->
 <!-- MENU -->
 <!---->
-	<aside class="mod left w300p">
+	<aside class="left w300p">
 		
 		<button class="red allread" onclick="if(confirm('Tout marquer comme lu pour tous les flux?'))window.location='action.php?action=readAll'">Tout marquer comme lu</button>
 		<ul class="flux">
@@ -160,7 +159,6 @@
 
 	</article>
 </div> <!-- #content -->
-</div> <!-- #wrap -->
 
 {else}
 	<div id="wrap">
