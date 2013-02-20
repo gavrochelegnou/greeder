@@ -9,12 +9,11 @@
 {if="($configurationManager->get('articleDisplayAnonymous')=='1') || ($myUser!=false)"}
 
 		<div id="wrap">
-			<aside class="mod left w300p">
+			<aside class="mod left w300p" style="padding-top:0px;">
 				<ul>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #addBloc').fadeToggle(200);">Ajout d'un flux</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #manageBloc').fadeToggle(200);">Gestion des flux</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #manageFolderBloc').fadeToggle(200);">Gestion des Dossiers</li>
-						<li class="pointer" onclick="$('.content section').hide();$('.content #synchronizeBloc').fadeToggle(200);">Mise &agrave; jour manuelle des flux</a></li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #preferenceBloc,.content #preferenceBloc section').fadeToggle(200);">Pr&eacute;f&eacute;rences</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #importBloc').fadeToggle(200);">Import</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #exportBloc').fadeToggle(200);">Export</li>
@@ -27,66 +26,65 @@
 			<article>
 
 				{if="(isset($myUser)) && ($myUser!=false)"}
-				<section id="preferenceBloc">
-					<form method="POST" action="action.php?action=updateConfiguration">
+				<section class="article" id="preferenceBloc">
 					<h2>Pr&eacute;f&eacute;rences :</h2>
-					<section>
-						<h2>G&eacute;n&eacute;ral</h2>
-						<p>Racine du projet : <input type="text" name="root" value="{$configurationManager->get('root')}"></p>
-						<h3>Laissez bien un "/" en fin de chaine ex : http://monsite.com/leed/</h3>
-				</section>
+					<br>
+					<form method="POST" action="action.php?action=updateConfiguration">
 
-				<section>
-					<h2>Utilisateur</h2>
-					<p>Identifiant : <input type="text" name="login" value="{$myUser->getLogin()}"></p>
-					<p>Mot de passe : <input type="text" name="password" value=""></p>
-					<h3>Laissez le champs vide si vous ne souhaitez pas changer le mot de passe</h3>
-				
-				</section>
+						<section class="article eventRead">
+							<h2>G&eacute;n&eacute;ral</h2>
+							<p>Adresse de votre installation : <input type="text" name="root" value="{$configurationManager->get('root')}"></p>
+							<h3>Laissez bien un "/" en fin de chaine ex : http://monsite.com/leed/</h3>
+						</section>
 
-				<section>
-					<h2>Synchronisation</h2>
-					<p><input type="radio"  {if="$synchronisationType=='auto'"} checked="checked" {/if} value="auto" name="synchronisationType"> <strong>Automatique (complet) :</strong> Le script mettra à jour automatiquement tous vos flux en une seule fois, ceci permet la mise &agrave; jour en une foix de tous vos flux mais peux faire ramer votre serveur, les appels cron ne doivent pas être trop rapproch&eacute;s</p>
-					<p><input type="radio" {if=" $synchronisationType=='graduate'"} checked="checked" {/if}  value="graduate" name="synchronisationType"> <strong>Automatique (gradu&eacute;) :</strong> Le script mettra à jour automatiquement les 10 flux les plus vieux en terme de mise &agrave; jour, ceci permet d'alleger la charge serveur et d'eviter els timeout intempestif mais necessiteun appel de cron plus fréquent afin de mettre à jour le plus de flux possible</p>
-					<p><input type="radio" {if="$synchronisationType=='manual'"} checked="checked" {/if}  value="manual" name="synchronisationType"> <strong>Automatique (complet) :</strong> Le script ne fait aucune mise à jour automatique, vous devez faire vous même les mises &agrave; jour depuis l'espace administration.</p>
-				</section>
+						<section class="article eventRead">
+							<h2>Utilisateur</h2>
+							<p>Identifiant : <input type="text" name="login" value="{$myUser->getLogin()}"></p>
+							<p>Mot de passe : <input type="text" name="password" value=""></p>
+							<h3>Laissez le champs vide si vous ne souhaitez pas changer le mot de passe.</h3>
+						
+						</section>
 
-				<section>
-					{if="$myUser!=false"}
-					<h2>Pr&eacute;ferences</h2>
-					<p>Autoriser la lecture anonyme: <input type="radio"    {if="$articleDisplayAnonymous=='1'"} checked="checked" {/if} value="1" name="articleDisplayAnonymous">Oui <input type="radio" {if="$articleDisplayAnonymous=='0'"} checked="checked" {/if} value="0" name="articleDisplayAnonymous">Non</p>
-					<h3>Nb: si vous choisissez cette option, les utilisateurs non authentifi&eacute; pourront consulter vos flux (sans pouvoir les marquer comme lu/non lu)</h3>
-					<p>Nombre d'articles par pages: <input type="text" value="{$configurationManager->get('articlePerPages')}" name="articlePerPages"></p>
-					<p>Affichage du lien direct de l'article: <input type="radio"  {if="$articleDisplayLink=='1'"} checked="checked" {/if}value="1" name="articleDisplayLink">Oui <input type="radio" {if="$articleDisplayLink=='0'"} checked="checked" {/if} value="0" name="articleDisplayLink">Non</p>
-					<p>Affichage de la date de l'article: <input type="radio" {if="$articleDisplayDate=='1'"} checked="checked" {/if} value="1" name="articleDisplayDate">Oui <input type="radio" {if="$articleDisplayDate=='0'"} checked="checked" {/if} value="0" name="articleDisplayDate">Non</p>
-					<p>Affichage de l'auteur de l'article: <input type="radio" {if="$articleDisplayAuthor=='1'"} checked="checked" {/if} value="1" name="articleDisplayAuthor">Oui <input type="radio" {if="$articleDisplayAuthor=='0'"} checked="checked" {/if} value="0" name="articleDisplayAuthor">Non</p>
-					<p>Affichage du contenu de l'article: <input type="radio"  {if="$articleDisplayContent=='1'"} checked="checked" {/if} value="1" name="articleDisplayContent">Oui <input type="radio" {if="$articleDisplayContent=='0'"} checked="checked" {/if} value="0" name="articleDisplayContent">Non</p>
-					<p>Type d'affichage du contenu: <input type="radio" {if="$articleView=='partial'"} checked="checked" {/if} value="partial" name="articleView">Partiel <input type="radio" {if="$articleView=='complete'"} checked="checked" {/if} value="complete" name="articleView">Complet</p>
-					<h3>Nb: si vous choissisez un affichage partiel des articles, un click sur ces derniers menera à l'article sur le blog de l'auteur.</h3>
-					<p>Conserver les <input type="text" value="{$configurationManager->get('feedMaxEvents')}" name="feedMaxEvents"> derniers &eacute;venement d'un flux</p>
-					<h3>Nb: Plus il y aura d'&eacute;venements &agrave; conserver, plus votre abse de données sera importante. Nous vous conseillons de garder les 50 derniers evenements maximums pour conserver une performance correcte.<br>Notez que vos &eacute;venements marqu&eacute;s comme favoris ne seront jamais supprim&eacute;s</h3>
-				
-				</section>
+						<section class="article eventRead">
+							<h2>Synchronisation</h2>
+							<p><input type="radio"  {if="$synchronisationType=='auto'"} checked="checked" {/if} value="auto" name="synchronisationType"> <strong>Automatique (complet) :</strong> Le script mettra à jour automatiquement tous vos flux en une seule fois, ceci permet la mise &agrave; jour en une foix de tous vos flux mais peux faire ramer votre serveur, les appels cron ne doivent pas être trop rapproch&eacute;s</p>
+							<p><input type="radio" {if=" $synchronisationType=='graduate'"} checked="checked" {/if}  value="graduate" name="synchronisationType"> <strong>Automatique (gradu&eacute;) :</strong> Le script mettra à jour automatiquement les 10 flux les plus vieux en terme de mise &agrave; jour, ceci permet d'alleger la charge serveur et d'eviter les timeout intempestif mais necessite un appel de cron plus fréquent afin de mettre à jour le plus de flux possible</p>
+							<p><input type="radio" {if="$synchronisationType=='manual'"} checked="checked" {/if}  value="manual" name="synchronisationType"> <strong>Automatique (complet) :</strong> Le script ne fait aucune mise à jour automatique, vous devez faire vous même les mises &agrave; jour depuis l'espace administration.</p>
+						</section>
 
-				<section>
-					<h2>Options</h2>
-					<p><input onchange="$('.shaarliBlock').slideToggle(200);" {if="$configurationManager->get('plugin_shaarli')=='1'"} checked="checked" {/if} type="checkbox" name="plugin_shaarli"> Activer le partage direct avec <a target="_blank" href="http://sebsauvage.net/wiki/doku.php?id=php:shaarli">shaarli</a></p>
-					<p class="shaarliBlock" {if="$configurationManager->get('plugin_shaarli')!='1'"}style="display:none;"{/if}>Lien vers votre shaarli: <input style="width:100%;" type="text" placeholder="http://mon.domaine.com/shaarli/" value="{$configurationManager->get('plugin_shaarli_link')}" name="plugin_shaarli_link"></p>
-					<h3>Nb: cette option affichera un bouton a coté de chaque news pour vous proposer de la partager/stocker sur le gestionnaire de lien shaarli.</h3>
-				</section>
+						<section class="article eventRead">
+							{if="$myUser!=false"}
+							<h2>Pr&eacute;ferences</h2>
+							<p>Autoriser la lecture anonyme: <input type="radio"    {if="$articleDisplayAnonymous=='1'"} checked="checked" {/if} value="1" name="articleDisplayAnonymous">Oui <input type="radio" {if="$articleDisplayAnonymous=='0'"} checked="checked" {/if} value="0" name="articleDisplayAnonymous">Non</p>
+							<h3>Nb: si vous choisissez cette option, les utilisateurs non authentifi&eacute;s pourront consulter vos flux (sans pouvoir les marquer comme lu/non lu).</h3>
+							<p>Nombre d'articles par pages: <input type="text" value="{$configurationManager->get('articlePerPages')}" name="articlePerPages"></p>
+							<p>Affichage du lien direct de l'article: <input type="radio"  {if="$articleDisplayLink=='1'"} checked="checked" {/if}value="1" name="articleDisplayLink">Oui <input type="radio" {if="$articleDisplayLink=='0'"} checked="checked" {/if} value="0" name="articleDisplayLink">Non</p>
+							<p>Affichage de la date de l'article: <input type="radio" {if="$articleDisplayDate=='1'"} checked="checked" {/if} value="1" name="articleDisplayDate">Oui <input type="radio" {if="$articleDisplayDate=='0'"} checked="checked" {/if} value="0" name="articleDisplayDate">Non</p>
+							<p>Affichage de l'auteur de l'article: <input type="radio" {if="$articleDisplayAuthor=='1'"} checked="checked" {/if} value="1" name="articleDisplayAuthor">Oui <input type="radio" {if="$articleDisplayAuthor=='0'"} checked="checked" {/if} value="0" name="articleDisplayAuthor">Non</p>
+							<p>Affichage du contenu de l'article: <input type="radio"  {if="$articleDisplayContent=='1'"} checked="checked" {/if} value="1" name="articleDisplayContent">Oui <input type="radio" {if="$articleDisplayContent=='0'"} checked="checked" {/if} value="0" name="articleDisplayContent">Non</p>
+							<p>Type d'affichage du contenu: <input type="radio" {if="$articleView=='partial'"} checked="checked" {/if} value="partial" name="articleView">Partiel <input type="radio" {if="$articleView=='complete'"} checked="checked" {/if} value="complete" name="articleView">Complet</p>
+							<h3>Nb: si vous choissisez un affichage partiel des articles, un click sur ces derniers menera à l'article sur le blog de l'auteur.</h3>
+							<p>Conserver les <input type="text" value="{$configurationManager->get('feedMaxEvents')}" name="feedMaxEvents"> derniers &eacute;venement d'un flux</p>
+							<h3>Nb: Plus il y aura d'&eacute;venements &agrave; conserver, plus votre abse de données sera importante. Nous vous conseillons de garder les 50 derniers evenements maximums pour conserver une performance correcte.<br>Notez que vos &eacute;venements marqu&eacute;s comme favoris ne seront jamais supprim&eacute;s.</h3>
+							</section>
 
+						<section class="article eventRead">
+							<h2>Options</h2>
+							<p><input onchange="$('.shaarliBlock').slideToggle(200);" {if="$configurationManager->get('plugin_shaarli')=='1'"} checked="checked" {/if} type="checkbox" name="plugin_shaarli"> Activer le partage direct avec <a target="_blank" href="http://sebsauvage.net/wiki/doku.php?id=php:shaarli">shaarli</a></p>
+							<p class="shaarliBlock" {if="$configurationManager->get('plugin_shaarli')!='1'"}style="display:none;"{/if}>Lien vers votre shaarli: <input style="width:100%;" type="text" placeholder="http://mon.domaine.com/shaarli/" value="{$configurationManager->get('plugin_shaarli_link')}" name="plugin_shaarli_link"></p>
+							<h3>Nb: cette option affichera un bouton a coté de chaque news pour vous proposer de la partager/stocker sur le gestionnaire de lien shaarli.</h3>
+						</section>
 
-				<button name="installButton" class="red">Enregistrer</button>
-				</form>
-				{else}
-				<p>Vous devez &eacute;tre connect&eacute; pour voir le bookmarklet.</p>
-				{/if}
+					<button name="installButton" class="red">Enregistrer</button>
+					</form>
+					{else}
+					<p>Vous devez &eacute;tre connect&eacute; pour voir le bookmarklet.</p>
+					{/if}
 				</section>
 			{/if}
 
-				<section id="manageFolderBloc">
+				<section class="article" id="manageFolderBloc">
 					<h2>Gestion des dossiers ({function="count($folders)"}) :</h2>
-
 					<br/>
 					<form method="POST" action="action.php?action=addFolder">
 						Nouveau dossier <input type="text" name="newFolder"> <button class="red">Ajouter</button>
@@ -98,21 +96,17 @@
 						<tr><td>{$value->getName()}</td><td><button class="red" onclick="renameFolder(this,{$value->getId()})">Renommer</button></td><td>{if="$value->getId()!='1'"}<button class="red" onclick="if(confirm('Etes vous sur de vouloir supprimer ce dossier? Cela supprimera tous les flux qu\'il contient.'))window.location='action.php?action=removeFolder&id={$value->getId()}'">Supprimer</button>{/if}</td></tr>
 						{/loop}
 					</table>
-
 				</section>
 
-			<section id="manageBloc">
-
+				<section class="article" id="manageBloc">
 					<h2>Gestion des flux :</h2>
 					<ul class="clear gestflux">
-				    {$feedsForFolder=""}
+					{$feedsForFolder=""}
 					{loop="$folders"}  
-					
 					{$feedsForFolder=$value->getFeeds()}
-						
-					<li>
-						<h1 class="folder" >{$value->getName()} ({function="count($feedsForFolder)"})</h1>
-						<table  style="width:100%;">
+					<li class="table-section-style eventRead">
+						<h2 class="folder" style="margin-bottom:5px;color:black;">{$value->getName()} ({function="count($feedsForFolder)"})</h2>
+						<table  style="width:100%; margin-bottom:0px;">
 							{if="count($feeds)!=0"}
 							{loop="$feedsForFolder"}
 								<tr>
@@ -122,17 +116,18 @@
 											<option {if="$value2->getFolder()==$value3->getId()"}selected="selected"{/if} value="{$value3->getId()}">{$value3->getName()}</option>
 										{/loop}
 									</select></td>
-									<td><button class="red" onclick="renameFeed(this,{$value2->getId()})">Renommer</button></td>
-									<td><button class="red" onclick="window.location='action.php?action=removeFeed&id={$value2->getId()}'">Supprimer</button></td></tr>
+									<td><button class="red right" onclick="renameFeed(this,{$value2->getId()})">Renommer</button></td>
+									<td><button class="red right" onclick="window.location='action.php?action=removeFeed&id={$value2->getId()}'">Supprimer</button></td>
+								</tr>
 							{/loop}
 							{/if}
 						</table>
 					</li>
 					{/loop}
-				</ul>
+					</ul>
 				</section>
 
-				<section id="bookBloc">
+				<section class="article" id="bookBloc">
 					<h2>Utiliser le bookmarklet :</h2>
 					<p>Vous pouvez ajout le bookmaklet ci dessus a votre naviguateur pour vous inscrire plus rapidemment au flux :</p>
 					{if="$myUser!=false"}
@@ -144,9 +139,9 @@
 				
 				<form action="action.php?action=addFeed" method="POST">
 					
-				<section id="addBloc">
-					<h2>Ajouter depuis une URL</h2>
-					<p>Lien du flux RSS : <input type="text" name="newUrl" placeholder="http://monflux.com/rss"/>&nbsp;
+				<section class="article" id="addBloc">
+					<h2>Ajouter un flux RSS</h2>
+					<p>Adresse du flux : <input type="text" name="newUrl" placeholder="http://monflux.com/rss"/>&nbsp;
 					 <select name="newUrlCategory">
 						{loop="$folders"}
 							<option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
@@ -157,22 +152,17 @@
 				</section>
 				</form>
 				
-				<section id="importBloc">
+				<section class="article" id="importBloc">
 					 <iframe class="importFrame" src="action.php?action=importForm" name="idFrame" id="idFrame" width="100%" height="500" ></iframe>
 				</section>
 
-				<section id="synchronizeBloc">
-					 <iframe class="importFrame" src="action.php?action=synchronizeForm" name="idFrameSynchro" id="idFrameSynchro" width="100%" height="500" ></iframe>
-				</section>
-
-				
-				
-				<form action="action.php?action=exportFeed" method="POST">
-				<section id="exportBloc">
+				<section class="article" id="exportBloc">
 					<h2>Exporter les flux au format opml</h2>
+					<form action="action.php?action=exportFeed" method="POST">
 					<p>Fichier OPML : <button name="exportButton" class="red">Exporter</button></p>
+					</form>
 				</section>
-				</form>
+				
 			</article>
 			
 			</div>
