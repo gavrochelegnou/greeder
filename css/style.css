@@ -47,7 +47,6 @@
 	margin: 0;
 	padding: 0;
 	}
-	ul, ol { padding-left: 5px }
 	code, pre, samp {
 	white-space: pre-wrap;
 	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
