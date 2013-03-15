@@ -124,8 +124,8 @@ function synchronize(code){
 	}
 }
 //now, gredder-code time !
-$(document).ready(function(){
-    $('#text').click(function(){
-        $(this).addClass('highlighted');
-    });
-});
+//$(document).ready(function(){
+//    $('#text').click(function(){
+//        $(this).addClass('highlighted');
+//    });
+//});
