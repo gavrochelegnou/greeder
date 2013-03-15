@@ -10,7 +10,7 @@
 
 		<div id="wrap">
 			<aside class="mod left w300p" style="padding-top:0px;">
-				<ul id="menuSettings">
+				<ul>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #manageBloc').fadeToggle(200);">Gestion des flux</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #manageFolderBloc').fadeToggle(200);">Gestion des Dossiers</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #preferenceBloc,.content #preferenceBloc section').fadeToggle(200);">Pr&eacute;f&eacute;rences</li>
@@ -162,13 +162,24 @@
 			
 		</div> <!-- #wrap -->
 
+	<footer>
+		<p>Leed : fabuleux agr&eacute;gateur par <a target="_blank" href="http://blog.idleman.fr">Idleman</a>. 
+		<br>Thème Greeder créé par <a href="http://tomcanac.com">Tom Canac</a>.
+		<br><a href="about.php">A propos</a>.</p>
+	</footer>
+
 {else}
-	<div id="main" class="wrapper clearfix">
-		<article>
+
+	<article class="content mod item" style="margin-top:15%;text-align:center">
 				<h3>Vous devez &ecirc;tre connect&eacute; pour consulter vos flux </h3>
 				<p>Si vous &ecirc;tes administrateur, vous pouvez r&eacute;gler les droits de visualisation dans la partie administration.</p>
-		</article>
-	</div>
+	</article>
+
+	<footer id="notLogged">
+		<p>Leed : fabuleux agr&eacute;gateur par <a target="_blank" href="http://blog.idleman.fr">Idleman</a>.
+			Thème Greeder créé par <a href="http://tomcanac.com">Tom Canac</a>.
+			<a href="about.php">A propos</a>.</p>
+	</footer>
 
 {/if}
 
