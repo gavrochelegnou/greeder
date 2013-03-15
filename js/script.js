@@ -52,7 +52,6 @@ function saveRenameFolder(element,folder){
 	});
 }
 
-
 function renameFeed(element,feed){
 	var feedLine = $(element).parent().parent();
 	var feedNameCase = $('td:first a',feedLine);
@@ -78,14 +77,10 @@ function saveRenameFeed(element,feed,url){
 	});
 }
 
-
-
-
 function changeFeedFolder(element,id){
 	var value = $(element).val();
 	window.location = "./action.php?action=changeFeedFolder&feed="+id+"&folder="+value;
 }
-
 
 function readThis(element,id,from){
 	var hide = ($('#pageTop').html()==''?true:false);
@@ -122,9 +117,15 @@ function readThis(element,id,from){
 function synchronize(code){
 	if(code!=''){
 	$('article').html('<section>'+
-	'<iframe class="importFrame" src="action.php?action=synchronize&format=html&code='+code+'" name="idFrameSynchro" id="idFrameSynchro" width="100%" height="300" ></iframe>'+
+	'<iframe class="importFrame" src="action.php?action=synchronize&format=html&code='+code+'" name="idFrameSynchro" id="idFrameSynchro" width="100%" height="400" ></iframe>'+
 	'</section>');
 	}else{
 		alert('Vous devez être connecté pour synchroniser vos flux');
 	}
 }
+//now, gredder-code time !
+$(document).ready(function(){
+    $('#text').click(function(){
+        $(this).addClass('highlighted');
+    });
+});

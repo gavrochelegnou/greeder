@@ -65,8 +65,7 @@
 <!---->
 <!-- ARTICLES -->
 <!---->
-<div class="content mod item">
-	<article>
+	<article class="content mod item">
 		{loop="$events"}
 			{$plainDescription=strip_tags($value->getDescription())}	
 			<!-- CORPS ARTICLE -->
@@ -75,10 +74,10 @@
 				<a class="anchor" name="{$value->getId()}"></a>
 				<!-- TITRE -->
 				<h2 class="articleTitle">
-					<button class="red lunonlu right" onclick="readThis(this,{$value->getId()}{$action=='unreadEvents' || $action==''?',true':''});">(lu/non lu)</button>
+					<button class="red right lunonlu" onclick="readThis(this,{$value->getId()}{$action=='unreadEvents' || $action==''?',true':''});">(lu/non lu)</button>
 					{if="$value->getFavorite()!=1"} <a class="grey favorite right" onclick="addFavorite(this,{$value->getId()});" >Favoriser</a> 
 					{else}
-					<a class="grey favorite right" onclick="removeFavorite(this,{$value->getId()});" >D&eacute;favoriser</a> 
+					<a class="grey right favorite " onclick="removeFavorite(this,{$value->getId()});" >D&eacute;favoriser</a> 
 					{/if}
 					{if="$shareOption!=false"}
 					<a target="_blank" class="grey favorite" alt="partager sur shaarli" title="partager sur shaarli" href="{$shareOption.'/index.php?post='.rawurlencode($value->getLink()).'&title='.$value->getTitle().'&source=bookmarklet' }">Shaare</a> 
@@ -134,7 +133,7 @@
 		<!-- PIED DE PAGE DES ARTICLES -->
 
 		{if="$pages!=0"}
-			<p>
+			<p id="pagination">
 				<a class="grey-h page">Page {$page}/{$pages} : </a>
 
 				{if="$previousPages>0"}
@@ -158,15 +157,25 @@
 		{/if}
 
 	</article>
-</div> <!-- #content -->
+
+	<footer>
+		<p>Leed : fabuleux agr&eacute;gateur par <a target="_blank" href="http://blog.idleman.fr">Idleman</a>. 
+		<br>Thème Greeder créé par <a href="http://tomcanac.com">Tom Canac</a>.
+		<br><a href="about.php">A propos</a>.</p>
+	</footer>
 
 {else}
-	<div id="wrap">
-		<article style="margin:70px 0px 0px 25px;">
+
+	<article class="content mod item" style="margin-top:15%;text-align:center">
 				<h3>Vous devez &ecirc;tre connect&eacute; pour consulter vos flux </h3>
 				<p>Si vous &ecirc;tes administrateur, vous pouvez r&eacute;gler les droits de visualisation dans la partie administration.</p>
-		</article>
-	</div>
+	</article>
+
+	<footer id="notLogged">
+		<p>Leed : fabuleux agr&eacute;gateur par <a target="_blank" href="http://blog.idleman.fr">Idleman</a>.
+			Thème Greeder créé par <a href="http://tomcanac.com">Tom Canac</a>.
+			<a href="about.php">A propos</a>.</p>
+	</footer>
 {/if}
 
 {include="footer"}

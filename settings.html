@@ -10,8 +10,7 @@
 
 		<div id="wrap">
 			<aside class="mod left w300p" style="padding-top:0px;">
-				<ul>
-						<li class="pointer" onclick="$('.content section').hide();$('.content #addBloc').fadeToggle(200);">Ajout d'un flux</li>
+				<ul id="menuSettings">
 						<li class="pointer" onclick="$('.content section').hide();$('.content #manageBloc').fadeToggle(200);">Gestion des flux</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #manageFolderBloc').fadeToggle(200);">Gestion des Dossiers</li>
 						<li class="pointer" onclick="$('.content section').hide();$('.content #preferenceBloc,.content #preferenceBloc section').fadeToggle(200);">Pr&eacute;f&eacute;rences</li>
@@ -22,8 +21,7 @@
 				</ul>
 			</aside>
 			
-			<div class="content mod item">
-			<article>
+			<article class="content mod item settingsBloc">
 
 				{if="(isset($myUser)) && ($myUser!=false)"}
 				<section class="article" id="preferenceBloc">
@@ -50,6 +48,7 @@
 							<p><input type="radio"  {if="$synchronisationType=='auto'"} checked="checked" {/if} value="auto" name="synchronisationType"> <strong>Automatique (complet) :</strong> Le script mettra à jour automatiquement tous vos flux en une seule fois, ceci permet la mise &agrave; jour en une foix de tous vos flux mais peux faire ramer votre serveur, les appels cron ne doivent pas être trop rapproch&eacute;s</p>
 							<p><input type="radio" {if=" $synchronisationType=='graduate'"} checked="checked" {/if}  value="graduate" name="synchronisationType"> <strong>Automatique (gradu&eacute;) :</strong> Le script mettra à jour automatiquement les 10 flux les plus vieux en terme de mise &agrave; jour, ceci permet d'alleger la charge serveur et d'eviter les timeout intempestif mais necessite un appel de cron plus fréquent afin de mettre à jour le plus de flux possible</p>
 							<p><input type="radio" {if="$synchronisationType=='manual'"} checked="checked" {/if}  value="manual" name="synchronisationType"> <strong>Automatique (complet) :</strong> Le script ne fait aucune mise à jour automatique, vous devez faire vous même les mises &agrave; jour depuis l'espace administration.</p>
+							<strong>Code de synchronisation : </strong> {$synchronisationCode}
 						</section>
 
 						<section class="article eventRead">
@@ -99,6 +98,17 @@
 				</section>
 
 				<section class="article" id="manageBloc">
+					<h2>Ajouter un flux RSS</h2>
+					<form action="action.php?action=addFeed" method="POST">
+						<p>Adresse du flux : <input type="text" name="newUrl" placeholder="http://monflux.com/rss"/>&nbsp;
+						 <select name="newUrlCategory">
+							{loop="$folders"}
+								<option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
+							{/loop}
+						</select>
+						 <button class="red">Ajouter</button></p>
+					</form>
+
 					<h2>Gestion des flux :</h2>
 					<ul class="clear gestflux">
 					{$feedsForFolder=""}
@@ -137,21 +147,6 @@
 					{/if}
 				</section>
 				
-				<form action="action.php?action=addFeed" method="POST">
-					
-				<section class="article" id="addBloc">
-					<h2>Ajouter un flux RSS</h2>
-					<p>Adresse du flux : <input type="text" name="newUrl" placeholder="http://monflux.com/rss"/>&nbsp;
-					 <select name="newUrlCategory">
-						{loop="$folders"}
-							<option {if="$value->getId()==1"}selected="selected"{/if} value="{$value->getId()}">{$value->getName()}</option>
-						{/loop}
-					</select>
-					 <button class="red">Ajouter</button></p>
-				
-				</section>
-				</form>
-				
 				<section class="article" id="importBloc">
 					 <iframe class="importFrame" src="action.php?action=importForm" name="idFrame" id="idFrame" width="100%" height="500" ></iframe>
 				</section>
@@ -165,7 +160,6 @@
 				
 			</article>
 			
-			</div>
 		</div> <!-- #wrap -->
 
 {else}

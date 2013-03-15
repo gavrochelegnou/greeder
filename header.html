@@ -15,7 +15,7 @@
 	<title>Leed</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0/">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="./css/style.css">
@@ -30,20 +30,19 @@
 			<div class="loginBloc">
 				{if="!$myUser"}
 				<form class="formulco" action="action.php?action=login" method="POST">
-						<input type="text" class="miniInput left" name="login" placeholder="Identifiant"/> <input type="password" class="miniInput left" name="password" placeholder="Mot de passe"/> <button class="red connexion">GO!</button>
+					<input type="text" class="miniInput left" name="login" placeholder="Identifiant"/> <input type="password" class="miniInput left" name="password" placeholder="Mot de passe"/> <button class="red connexion">GO!</button>
 				</form>
 				{else}
 			</div>
-				<nav id="icons">
-					<a href="index.php"><img src="home.png" class="icon" alt="Accueil"></a>
-					<a href="index.php?action=favorites"><img src="favs.png" class="icon" alt="Favoris"></a>
-					<a href="settings.php"><img src="settings.png" class="icon" alt="Paramètres"></a>
-					<a class="synchronyzeButton" title="Synchroniser" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');"><img src="sync.png" class="icon" alt="Actualiser"></a>
-				</nav>
-				<button class="grey deco" onclick="window.location='action.php?action=logout'">
-					D&eacute;connexion
-				</button>
-				{/if}
-				<div class="clear"></div>
-			</div>
+			<nav id="icons">
+				<a href="index.php"><img src="home.png" class="icon" alt="Accueil"></a>
+				<a href="index.php?action=favorites"><img src="favs.png" class="icon" alt="Favoris"></a>
+				<a href="settings.php"><img src="settings.png" class="icon" alt="Paramètres"></a>
+				<a class="synchronyzeButton" title="Synchroniser" onclick="synchronize('{if="$myUser"}{$synchronisationCode}{/if}');"><img src="sync.png" class="icon" alt="Actualiser"></a>
+			</nav>
+			<button class="grey deco" onclick="window.location='action.php?action=logout'">
+				D&eacute;connexion
+			</button>
+			{/if}
+			<div class="clear"></div>
 		</header>
