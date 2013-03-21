@@ -30,6 +30,7 @@ if(e.which == keyCode['shift']) isMaj=false;
     if(e.which == keyCode['shift']) isMaj=true;
     
     if($("input:focus").length==0){
+	console.log(e.which);
     switch(e.which){
     	
         case keyCode['m']:
@@ -110,6 +111,7 @@ function openTargetEvent(){
 }
 
 function readTargetEvent(){
+	console.log('READ');
 	var buttonElement = $('.eventSelected .readUnreadButton');
 	var id = $('.anchor',target).attr('name');
 	readThis(buttonElement,id,null,function(){
