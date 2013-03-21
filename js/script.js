@@ -1,3 +1,143 @@
+var isCtrl = false;
+var isMaj = false;
+var keyCode = new Array();
+
+keyCode['shift'] = 16;
+keyCode['ctrl'] = 17;
+keyCode['enter'] = 13;
+keyCode['m'] = 77;
+keyCode['s'] = 83;
+keyCode['n'] = 78;
+keyCode['v'] = 86;
+keyCode['p'] = 80;
+keyCode['k'] = 75;
+keyCode['o'] = 79;
+keyCode['space'] = 32;
+
+$(document).ready(function(){
+
+	targetThisEvent($('article section:first'),true);
+
+});
+
+
+$(document).keyup(function (e) {
+if(e.which == keyCode['ctrl']) isCtrl=false;
+if(e.which == keyCode['shift']) isMaj=false;
+}).keydown(function (e) {
+ 	//alert(e.which);
+    if(e.which == keyCode['ctrl']) isCtrl=true;
+    if(e.which == keyCode['shift']) isMaj=true;
+    
+    if($("input:focus").length==0){
+    switch(e.which){
+    	
+        case keyCode['m']:
+                //marque l'élément sélectionné comme lu / non lu
+                readTargetEvent();
+            return false;
+        break;
+
+        case keyCode['s']:
+                //marque l'élément sélectionné comme favori / non favori
+                switchFavoriteTargetEvent();
+            return false;
+        break;
+        case keyCode['n']:
+            //élément suivant (sans l'ouvrir)
+            targetNextEvent();
+            return false;
+        break;
+        case keyCode['v']:
+            //ouvre l'url de l'élément sélectionné
+            openTargetEvent();
+            return false;
+        break;
+        case keyCode['p']:
+            //élément précédent (sans l'ouvrir)
+            targetPreviousEvent();
+            return false;
+        break;
+        case keyCode['space']:
+            if(isMaj){
+                //élément précédent (et l'ouvrir)
+                targetPreviousEvent();
+                openTargetEvent();
+            }else{
+                //élément suivant (et l'ouvrir)
+                targetNextEvent();
+                openTargetEvent();
+            }
+            return false;
+        break;
+        case keyCode['k']:
+            //élément précédent (et l'ouvrir)
+            targetPreviousEvent();
+            openTargetEvent();
+            return false;
+        break;
+        case keyCode['o']:
+        case keyCode['enter']:
+            //ouvrir l'élément sélectionné
+            openTargetEvent();
+            return false;
+        break;
+    }
+        }
+});
+
+/* Fonctions de séléctions */
+
+function targetPreviousEvent(){
+	targetThisEvent($('.eventSelected').prev(':visible'),true);
+}
+function targetNextEvent(){
+
+	targetThisEvent($('.eventSelected').next(':visible'),true);
+}
+
+function targetThisEvent(event,focusOn){
+	target = $(event);
+	if(target.prop("tagName")=='SECTION'){
+		$('.eventSelected').removeClass('eventSelected');
+		target.addClass('eventSelected');
+		var id = $('.anchor',target).attr('name');
+		if(focusOn)window.location = '#'+id;
+	}
+}
+function openTargetEvent(){
+	window.open($('.eventSelected .articleTitle a').attr('href'), '_blank');
+}
+
+function readTargetEvent(){
+	var buttonElement = $('.eventSelected .readUnreadButton');
+	var id = $('.anchor',target).attr('name');
+	readThis(buttonElement,id,null,function(){
+		targetThisEvent($('.eventSelected').next(),true);
+	});
+
+
+
+}
+
+function readAllDisplayedEvents(){
+	$('article section').each(function(i,article){
+		var buttonElement = $('.readUnreadButton',article);
+		var id = $('.anchor',article).attr('name');
+		readThis(buttonElement,id);
+	});
+}
+
+function switchFavoriteTargetEvent(){
+	var id = $('.anchor',target).attr('name');
+	if($('.favorite',target).html()=='Favoriser'){
+		addFavorite($('.favorite',target),id);
+	}else{
+		removeFavorite($('.favorite',target),id);
+	}
+}
+
+
 function toggleFolder(element,folder){
 	feedBloc = $('ul',$(element).parent());
 
